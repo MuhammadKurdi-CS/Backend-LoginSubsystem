@@ -142,3 +142,33 @@ exports.getLoginInfo = async (username) => {
         throw error;
     }
 }
+
+//deletes a user's account by their id in the database
+exports.delete = async (id) => { 
+    try {
+        let sql = `SELECT deleted from user WHERE
+                    id = \'${id}'`;
+        const connection = await mysql.createConnection(info.config);
+
+        var data = await connection.query(sql);
+
+        if(data.length == 0){
+            throw {message:'user not found in the database', status: 400};
+        } else if (data[0].deleted == 1) {
+            throw {message:'account already deleted in the database', status: 400}
+        } else if (data[0].deleted == 0){
+        sql = `UPDATE user 
+                   SET deleted = true
+                   WHERE id = \'${id}'`;
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("Record is deleted!");
+          });
+        } 
+        await connection.end();
+    } catch (error) {
+        if(error.status === undefined)
+            error.status = 500;
+        throw error;
+    }
+}

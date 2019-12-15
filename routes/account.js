@@ -53,4 +53,18 @@ router.get('/getlogininfo',  authenticated, bodyParser(), async (cnx, next) =>{
    }
 });
 
+//the delete request will delete a user's account by their id
+router.delete('/delete/:id', bodyParser(), async (cnx, next) =>{ 
+   try{
+      let id = await model.delete(cnx.params.id);
+      cnx.response.status = 201;
+      cnx.body = {message:id};
+   }
+   catch(error){
+      cnx.response.status = error.status;
+      cnx.body = {message:error.message};
+   }
+});
+
+
 module.exports = router;
