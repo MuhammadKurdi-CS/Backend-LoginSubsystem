@@ -1,0 +1,20 @@
+{
+  "name": "-304cem-backend-loginsubsystem",
+  "version": "1.0.0",
+  "description": "backend login sub system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/304cem-1920SEPJAN/-304CEM-Backend-LoginSubsystem.git"
+  },
+  "author": "Muhammad Mohammadi",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  }
+}
