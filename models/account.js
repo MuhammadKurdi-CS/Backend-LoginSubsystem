@@ -120,3 +120,25 @@ exports.getOne = async (id) => {
         throw error;
     }
 }
+
+//gets login information process in database for a user
+exports.getLoginInfo = async (username) => { 
+    try {
+        let sql = `SELECT username, firstName, lastName, email, about, dateRegistered, countryID, profileImageURL from user WHERE
+                    username = \'${username}'`;
+        const connection = await mysql.createConnection(info.config);
+        var data = await connection.query(sql);
+        if(data.count==0) throw {message:'no user found', status: 400};
+        await connection.end();
+
+        let date = String(data[0].dateRegistered)
+        date = date.slice(0, -40) 
+        data[0].dateRegistered = date
+
+        return data
+    } catch (error) {
+        if(error.status === undefined)
+            error.status = 500;
+        throw error;
+    }
+}

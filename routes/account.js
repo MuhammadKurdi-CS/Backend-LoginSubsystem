@@ -37,4 +37,20 @@ router.get('/getOne/:id',  authenticated, async (cnx, next) =>{
    }
 });
 
+//gets login information process via get API request
+router.get('/getlogininfo',  authenticated, bodyParser(), async (cnx, next) =>{
+   try {
+        const user = cnx.request.jwtPayload.sub
+        console.log(user)
+        let results = await model.getLoginInfo(user)
+        console.log(results)
+        cnx.response.status = 200
+        cnx.body = results
+   }
+   catch(error){
+      cnx.response.status = error.status;
+      cnx.body = {message:error.message};
+   }
+});
+
 module.exports = router;
