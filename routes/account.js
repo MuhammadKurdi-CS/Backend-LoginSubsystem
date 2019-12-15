@@ -20,4 +20,21 @@ router.post('/', bodyParser(), async (ctx, next) => {
    ctx.body = {message: "user added successfully!"};
 });
 
+// get one account holder in login history database via user id
+router.get('/getOne/:id',  authenticated, async (cnx, next) =>{
+   try{
+      let id = await model.getOne(cnx.params.id)
+      console.log(id)
+      let date = String(id[0].attemptDate)
+      date = date.slice(0, -40) 
+      id[0].attemptDate = date
+      cnx.response.status = 201;
+      cnx.body = id
+   }
+   catch(error){
+      cnx.response.status = error.status;
+      cnx.body = {message:error.message};
+   }
+});
+
 module.exports = router;

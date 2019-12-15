@@ -100,3 +100,23 @@ exports.postAccount = async (user) => {
         throw error;
     }
 }
+
+// get one account holder in login history database via user id
+exports.getOne = async (id) => { 
+    try {
+        let sql = `SELECT * from loginhistory WHERE
+                    id = \'${id}'`;
+        const connection = await mysql.createConnection(info.config);
+        var data = await connection.query(sql);
+
+        if(data.length == 0){
+            throw {message:'not record found in database', status: 400};
+        } 
+        await connection.end();
+        return data
+    } catch (error) {
+        if(error.status === undefined)
+            error.status = 500;
+        throw error;
+    }
+}
