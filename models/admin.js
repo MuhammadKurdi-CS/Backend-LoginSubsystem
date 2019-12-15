@@ -1,7 +1,7 @@
 'use strict';
 
 var mysql = require('promise-mysql');
-var info = require('../configure');
+var info = require('../config');
 
 exports.createTables = async ()=> {
 

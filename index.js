@@ -15,14 +15,15 @@ app.use(userAgent);
 
 //import all the routes
 var account = require('./routes/account.js')
-var loginhistory = require('./routes/loginhistory.js')
-var admin = require('./routes/admin.js')
+//var loginhistory = require('./routes/loginhistory.js')
+//var admin = require('./routes/admin.js')
 
 //apply the routes as a middleware
 app.use(cors()); 
+//app.use(admin.routes());
 app.use(account.routes());
-app.use(loginhistory.routes());
-app.use(admin.routes());
+//app.use(loginhistory.routes());
+
 
 //if there is no environment variable set for port number
 //use a default value of 3000
