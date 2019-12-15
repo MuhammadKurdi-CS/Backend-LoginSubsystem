@@ -51,15 +51,13 @@ exports.postValid = async (user) => {
 
 exports.saving = async (username, ip, browser, deviceDetails, succeeded) => {
     try {
-
         let success = 1
         if(succeeded == false){
             success = 0
         }
-        var d = new Date();
-
-        const attemptDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() 
-        const timeOfLogin = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() 
+        var date = new Date();
+        const attemptDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
+        const timeOfLogin = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() 
         let sql = `INSERT INTO loginhistory(username, attemptDate, succeeded, IP, browser, timeOfLogin, deviceDetails) VALUES("${username}", "${attemptDate}", "${success}", "${ip}", "${browser}", "${timeOfLogin}", "${deviceDetails}")`;
         const connection = await mysql.createConnection(info.config);
         var data = await connection.query(sql);
