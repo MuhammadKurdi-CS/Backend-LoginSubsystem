@@ -33,13 +33,10 @@ router.post('/', bodyParser(), async (cnx, next) =>{ //logs a user in
       succeeded = true 
 
       await model.saving(newUser.username, clientIP, browser, deviceDetails, succeeded)
-     
-      cnx.response.status = 201;
-      cnx.body = token; //returns in the body, the JWT token
 
    }
    catch(error){
-      await model.saveLogin(newUser.username, clientIP, browser, deviceDetails, succeeded)
+      await model.saving(newUser.username, clientIP, browser, deviceDetails, succeeded)
       cnx.response.status = error.status;
       console.log("Error:")
       console.log(error)

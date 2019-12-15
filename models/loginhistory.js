@@ -7,7 +7,7 @@ var info = require('../config');
 
 exports.postValid = async (user) => { 
     try {
-
+        //server validations for username and password
         if(user.username === undefined){throw {message:'username is not passing', status:400};}
 
         if(user.password === undefined){throw {message:'password is not passing', status:400};}
